@@ -157,6 +157,7 @@ void c8_execinst(struct chip8_instance *c8)
 					fprintf(stderr, "Unknown opcode %.4X\n", op);
 					break;
 			}
+			break;
 		case 0xF000:
 			switch (op & 0x00FF) {
 				case 0x0007: /* FX07 */
@@ -205,14 +206,16 @@ void c8_execinst(struct chip8_instance *c8)
 					fprintf(stderr, "Unknown opcode %.4X\n", op);
 					break;
 			}
+			break;
 	}
 }
 
-/* there is probably a better way of doing this */
+/* on linux, allegro uses the native layout for keycodes. this is a very silly
+ * idea but it's there so i have to hardcode in a dvorak layout. too bad */
 void c8_key_toggle(struct chip8_instance *c8, int keycode)
 {
 	switch (keycode) {
-		case ALLEGRO_KEY_X:
+		case ALLEGRO_KEY_Q:
 			c8->key[0x0] ^= 1;
 			break;
 		case ALLEGRO_KEY_1:
@@ -224,40 +227,40 @@ void c8_key_toggle(struct chip8_instance *c8, int keycode)
 		case ALLEGRO_KEY_3:
 			c8->key[0x3] ^= 1;
 			break;
-		case ALLEGRO_KEY_Q:
+		case ALLEGRO_KEY_QUOTE:
 			c8->key[0x4] ^= 1;
 			break;
-		case ALLEGRO_KEY_W:
+		case ALLEGRO_KEY_COMMA:
 			c8->key[0x5] ^= 1;
 			break;
-		case ALLEGRO_KEY_E:
+		case ALLEGRO_KEY_FULLSTOP:
 			c8->key[0x6] ^= 1;
 			break;
 		case ALLEGRO_KEY_A:
 			c8->key[0x7] ^= 1;
 			break;
-		case ALLEGRO_KEY_S:
+		case ALLEGRO_KEY_O:
 			c8->key[0x8] ^= 1;
 			break;
-		case ALLEGRO_KEY_D:
+		case ALLEGRO_KEY_E:
 			c8->key[0x9] ^= 1;
 			break;
-		case ALLEGRO_KEY_Z:
+		case ALLEGRO_KEY_SEMICOLON:
 			c8->key[0xA] ^= 1;
 			break;
-		case ALLEGRO_KEY_C:
+		case ALLEGRO_KEY_J:
 			c8->key[0xB] ^= 1;
 			break;
 		case ALLEGRO_KEY_4:
 			c8->key[0xC] ^= 1;
 			break;
-		case ALLEGRO_KEY_R:
+		case ALLEGRO_KEY_P:
 			c8->key[0xD] ^= 1;
 			break;
-		case ALLEGRO_KEY_F:
+		case ALLEGRO_KEY_U:
 			c8->key[0xE] ^= 1;
 			break;
-		case ALLEGRO_KEY_V:
+		case ALLEGRO_KEY_K:
 			c8->key[0xF] ^= 1;
 			break;
 		case ALLEGRO_KEY_ESCAPE:
